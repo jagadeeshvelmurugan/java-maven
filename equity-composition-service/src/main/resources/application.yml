@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: equity-composition-service
+
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:postgres}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        format_sql: false
+
+  mvc:
+    async:
+      request-timeout: 0
+
+server:
+  port: 8080
+  tomcat:
+    max-swallow-size: -1
+
+logging:
+  level:
+    com.example.equity: INFO
+    org.hibernate.SQL: WARN
